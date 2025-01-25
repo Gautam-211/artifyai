@@ -17,7 +17,7 @@ interface RemoveUrlQueryParams {
 }
 
 // Define a type for the aspect ratio options
-type AspectRatioKey = keyof typeof aspectRatioOptions;
+export type AspectRatioKey = keyof typeof aspectRatioOptions;
 
 // Define an interface for image dimensions
 interface ImageDimensions {
@@ -148,7 +148,7 @@ export const download = (url: string, filename: string): void => {
 };
 
 // Typed deep merge function with generics
-export function deepMergeObjects<T extends Record<string, unknown>>(
+export function deepMergeObjects<T extends Transformations>(
   obj1: T,
   obj2: T | null | undefined
 ): T {

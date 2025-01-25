@@ -22,10 +22,10 @@ declare type CreateUserParams = {
     image: {
       title: string;
       publicId: string;
-      transformationType: string;
+      transformationType: TransformationTypeKey;
       width: number;
       height: number;
-      config: Record<string, unknown>; // Replaced `any` with `Record<string, unknown>`
+      config?: Transformations | null; // Replaced `any` with `Record<string, unknown>`
       secureURL: string;
       transformationURL: string;
       aspectRatio?: string; // Optional field
@@ -44,7 +44,7 @@ declare type CreateUserParams = {
       transformationType: string;
       width: number;
       height: number;
-      config: Record<string, unknown>; // Replaced `any` with `Record<string, unknown>`
+      config: Transformations | null;
       secureURL: string;
       transformationURL: string;
       aspectRatio?: string; // Optional field
