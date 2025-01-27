@@ -154,8 +154,8 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
                 }
             }))
 
-            return onChangeField(value);
-        }, 1000)
+        }, 1000)()
+        return onChangeField(value);
     } 
 
     const onTransformHandler = async() => {
@@ -168,7 +168,7 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
         setNewTransformation({});  //  possible error
         
         startTransition(async() => {
-            await updateCredits(userId, creditFee);
+            await updateCredits(userId, 0); //testing
         })
     }
 
@@ -204,6 +204,7 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
                         render={({field}) => (
                             <Select
                                 onValueChange={(value: string) => onSelectFieldHandler(value, field.onChange as (value: string) => void)}
+                                value={field?.value as string}
                             >
                                 <SelectTrigger className="select-field">
                                     <SelectValue placeholder="Select Size" />
@@ -233,7 +234,7 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
                                     type === 'remove' ? 'Object to remove' : "Object to recolor"
                                 }
                                 className="w-full"
-                                render={(({field}) => (
+                                render={({field}) => (
                                     <Input
                                         value={field.value as string}
                                         className="input-field"
@@ -244,7 +245,7 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
                                             field.onChange as (value : string) => void 
                                         ))}
                                     />
-                                ))}
+                                )}
                             />
 
                             {

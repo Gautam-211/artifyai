@@ -1,13 +1,22 @@
-import { dataUrl, debounce, getImageSize } from '@/lib/utils'
-import { CldImage } from 'next-cloudinary'
+'use client'
+
+import { dataUrl, debounce, download, getImageSize } from '@/lib/utils'
+import { CldImage, getCldImageUrl } from 'next-cloudinary'
 import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props'
 import Image from 'next/image'
 import React from 'react'
 
 const TransformedImage = ({image, type, title, transformationConfig, isTransforming, setIsTransforming, hasDownload = false} : TransformedImageProps & { image: { width: number; height: number; publicId: string; title: string } }) => {
   
-    const downloadHandler = () => {
+    const downloadHandler = (e : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
 
+        download(getCldImageUrl({
+            width : image?.width,
+            height : image?.width,
+            src : image?.publicId,
+            ...transformationConfig
+        }), title)
     }
 
     return (
@@ -19,7 +28,7 @@ const TransformedImage = ({image, type, title, transformationConfig, isTransform
 
             {
                 hasDownload && (
-                    <button className='download-btn' onClick={(e) => downloadHandler}>
+                    <button className='download-btn' onClick={(e) => downloadHandler(e)}>
                         <Image
                             src={"/assets/icons/download.svg"}
                             alt='download'
@@ -49,7 +58,7 @@ const TransformedImage = ({image, type, title, transformationConfig, isTransform
                         onError={() => {
                             debounce(() => {
                                 if(setIsTransforming) setIsTransforming(false)
-                            },8000)
+                            },8000)()
                         }}
                         {...transformationConfig}
                     />
@@ -59,10 +68,11 @@ const TransformedImage = ({image, type, title, transformationConfig, isTransform
                             <div className='transforming-loader'>
                                 <Image
                                     src={"/assets/icons/spinner.svg"}
-                                    alt='Transforming'
+                                    alt='spinner'
                                     width={50}
                                     height={50}
                                 />
+                                <p className='text-white/80'>PLease wait... </p>
                             </div>
                         )
                     }
