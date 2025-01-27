@@ -33,7 +33,7 @@ const MobileNav = () => {
                         <Image src={"/assets/icons/menu.svg"} alt="menu" width={32} height={32} className="cursor-pointer"/>
                     </SheetTrigger>
                     <SheetContent className="sheet-content sm:w-64">
-                        <SheetTitle>Hello</SheetTitle>
+                        <SheetTitle>Imaginify</SheetTitle>
                         <>
                             <Image src={"/assets/images/logo-text.svg"} alt="logo" width={152} height={23}/>
 

@@ -8,7 +8,9 @@ import { auth } from "@clerk/nextjs/server";
 import { getUserImages } from "@/lib/actions/image.actions";
 
 const Profile = async ({ searchParams }: SearchParamProps) => {
-  const page = Number(searchParams?.page) || 1;
+
+  const {pageNo} = await searchParams;
+  const page = Number(pageNo) || 1;
   const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");

@@ -17,7 +17,6 @@ interface MongooseConnection {
  * This is the preferred way to add types to the global scope in Node.js environments
  */
 declare global {
-  // eslint-disable-next-line no-unused-vars
   interface Global {
     mongoose: MongooseConnection | undefined;
   }

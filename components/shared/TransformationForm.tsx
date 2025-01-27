@@ -49,6 +49,8 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
     const [isPending, startTransition] = useTransition()
     const router = useRouter();
 
+    console.log(isPending);
+
     const intitialValues = data && action === "Update" ? {
         title : data?.title,
         aspectRatio : data?.aspectRatio,
@@ -168,7 +170,7 @@ const TransformationForm = ({action , data=null, userId, type, creditBalance, co
         setNewTransformation({});  //  possible error
         
         startTransition(async() => {
-            await updateCredits(userId, 0); //testing
+            await updateCredits(userId, creditFee); 
         })
     }
 
